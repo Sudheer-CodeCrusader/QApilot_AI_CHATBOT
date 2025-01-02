@@ -1,0 +1,146 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #919191; /* Dark background */
+    margin: 0;
+    padding: 0;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px 40px;
+    background-color: #ffffff; /* Header color */
+    box-shadow: 0 8px 10px rgba(228, 91, 0, 0.1);
+}
+
+.header-logo {
+    width: 400px; /* Adjust as needed */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.nav-menu {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #000000; /* White text */
+    font-weight: bold;
+}
+
+.get-access {
+    background-color: #e4883d; /* Orange color */
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+.get-access:hover {
+    background-color: #e68a00; /* Darker orange on hover */
+}
+
+main {
+    display: flex;
+    justify-content: Right;
+    align-items: right;
+    height: calc(100vh - 60px); /* Adjust for header height */
+}
+
+
+.chat-container {
+    width: 100%;
+    max-width: 600px; /* Increased from 400px */
+    height: 90vh; /* Added fixed height */
+    min-height: 600px; /* Minimum height */
+    border-radius: 20px; /* Increased border radius */
+    background-color: #ffffff;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+
+.chat-box {
+    flex: 3;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between messages */
+}
+
+.bot-message, .user-message {
+    padding: 15px;
+    border-radius: 18px;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+.bot-message {
+    background-color: #00a2ff; /* Light blue for bot messages */
+    align-self: flex-start;
+}
+
+.user-message {
+    background-color: #ff7300; /* Light green for user messages */
+    align-self: flex-end;
+}
+
+.input-container {
+    display: flex;
+    border-top: 1px solid #f18054;
+    padding: 10px;
+    background-color: #FF5722;
+}
+
+#query {
+    flex: 1;
+    padding: 1px;
+    border: 1px solid #ffffff;
+    border-radius: 1px;
+}
+
+button {
+    margin-left: 10px;
+    padding: 10px 15px;
+    background-color: #ffffff; /* Green color */
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+.message-image {
+    width: 30px; /* Adjust as needed */
+    height: 30px; /* Maintain aspect ratio */
+    border-radius: 50%; /* Circular images */
+    margin-right: 5px; /* Space between image and text */
+}
+
+.question-buttons {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin-top: 10px; /* Space between question buttons and chat */
+}
+
+.question-buttons button {
+    margin: 15px 0;
+    padding: 10px;
+    background-color: #ff5722; /* Button color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.question-buttons button:hover {
+    background-color: #000000; /* Darker orange on hover */
+}

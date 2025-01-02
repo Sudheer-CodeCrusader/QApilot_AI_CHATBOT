@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QA Pilot Chatbot</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional styles for the chat header */
+        .chat-header {
+            background-color: #FF5722;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px 10px 0 0;
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        .welcome-text {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .help-text {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .close-button {
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 5px;
+        }
+
+        .chat-box h2 {
+            color: #FF5722;
+            text-align: center;
+            font-size: 24px;
+            margin: 20px 0;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <img src="https://qapilot.io/wp-content/uploads/2024/09/QAPilot-Logo.svg" class="custom-logo" alt="QAPilot Logo" decoding="async">
+            <nav class="nav-menu">
+                <a href="https://qapilot.io/" class="nav-link">Home</a>
+                <a href="https://qapilot-ai.hashnode.dev/best-ai-powered-mobile-automation-testing-tools-for-android-and-ios" class="nav-link">Blog</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="chat-container">
+            <!-- Added new chat header -->
+            <div class="chat-header">
+                <div class="welcome-text">Welcome! Automated Chatbot QApilot</div>
+                <div class="help-text">How can we help you?</div>
+                <button class="close-button">×</button>
+            </div>
+            
+            <div class="chat-box" id="chat-box">
+                <div class="bot-message">Hi, We are here to help you. How can I assist you today?</div>
+            </div>
+            <div class="input-container">
+                <input type="text" id="query" placeholder="Type your message here..." onkeypress="handleEnter(event)" />
+                <button onclick="submitQuery()">Send</button>
+            </div>
+            <div class="question-buttons" id="question-buttons"></div>
+        </div>
+    </main>
+
+    <script>
+        // Existing JavaScript code remains unchanged
+        const loadQuestions = async () => {
+            try {
+                const response = await fetch('/data.json');
+                const questions = await response.json();
+                const buttonsContainer = document.getElementById('question-buttons');
+
+                for (const [key, value] of Object.entries(questions)) {
+                    const button = document.createElement('button');
+                    button.innerText = key;
+                    button.onclick = () => {
+                        const chatBox = document.getElementById('chat-box');
+                        const botMessage = document.createElement('div');
+                        botMessage.className = 'bot-message';
+                        botMessage.innerText = value;
+                        chatBox.appendChild(botMessage);
+                        chatBox.scrollTop = chatBox.scrollHeight;
+                    };
+                    buttonsContainer.appendChild(button);
+                }
+            } catch (error) {
+                console.error('Error loading questions:', error);
+            }
+        };
+
+        window.onload = loadQuestions;
+
+        async function submitQuery() {
+            const queryInput = document.getElementById('query');
+            const query = queryInput.value.trim();
+            if (!query) return;
+
+            const chatBox = document.getElementById('chat-box');
+            const userMessage = document.createElement('div');
+            userMessage.className = 'user-message';
+            userMessage.innerText = query;
+            chatBox.appendChild(userMessage);
+
+            try {
+                const response = await fetch('/search', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ query })
+                });
+                const result = await response.text();
+
+                const botMessage = document.createElement('div');
+                botMessage.className = 'bot-message';
+                botMessage.innerText = result;
+                chatBox.appendChild(botMessage);
+            } catch (error) {
+                const errorMessage = document.createElement('div');
+                errorMessage.className = 'bot-message';
+                errorMessage.innerText = 'An error occurred. Please try again.';
+                chatBox.appendChild(errorMessage);
+            }
+
+            queryInput.value = '';
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function handleEnter(event) {
+            if (event.key === 'Enter') {
+                submitQuery();
+            }
+        }
+
+        // Add close button functionality
+        document.querySelector('.close-button').addEventListener('click', function() {
+            document.querySelector('.chat-header').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
