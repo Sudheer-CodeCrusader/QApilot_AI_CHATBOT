@@ -74,4 +74,4 @@ This project is licensed under the MIT License. See the LICENSE file for details
 ---
 
 ## Contact
-For questions, feedback, or contributions, reach out via email at [your-email@example.com](mailto:your-email@example.com).
+For questions, feedback, or contributions, reach out via linkedin - https://www.linkedin.com/in/sudheer-reddy-software-development-test-engineer/
